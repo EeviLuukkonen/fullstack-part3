@@ -1,4 +1,4 @@
-POST http://localhost:3001/api/persons
+PUT http://localhost:3001/api/persons/635922994d053803a25cebca
 Content-Type: application/json
 
 {
