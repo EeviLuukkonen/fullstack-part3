@@ -18,14 +18,17 @@ app.get('/info', (req, res) => {
     const date = new Date()
     console.log(date)
     
-    res.send(`<p>Phonebook has info for ${Person.length} people</p>
-            <p>${new Date}</p>`)
+    Person.find({})
+      .then(persons => {
+        res.send(`<p>Phonebook has info for ${persons.length} people</p>
+        <p>${new Date}</p>`)
+      })
 })
 
 app.get('/api/persons', (req, res, next) => {
   Person.find({})
     .then(persons => {
-    res.json(persons)
+      res.json(persons)
     })
     .catch(error => next(error))
 })
@@ -84,7 +87,7 @@ app.put('/api/persons/:id', (req, res, next) => {
     name: body.name,
     number: body.number,
   }
-  console.log(person)
+  console.log(body)
 
   Person.findByIdAndUpdate(req.params.id, person, { new: true })
     .then(updatedPerson => {
