@@ -22,10 +22,12 @@ app.get('/info', (req, res) => {
             <p>${new Date}</p>`)
 })
 
-app.get('/api/persons', (req, res) => {
-  Person.find({}).then(persons => {
+app.get('/api/persons', (req, res, next) => {
+  Person.find({})
+    .then(persons => {
     res.json(persons)
-  })
+    })
+    .catch(error => next(error))
 })
 
 app.get('/api/persons/:id', (req, res, next) => {
